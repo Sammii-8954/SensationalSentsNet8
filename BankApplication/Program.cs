@@ -1,6 +1,7 @@
 using BankApplication.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SensationalScentsWeb.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
