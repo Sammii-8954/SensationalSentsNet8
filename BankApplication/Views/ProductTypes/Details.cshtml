@@ -1,0 +1,32 @@
+﻿@using SensationalScentsWeb.Models
+@model ProductTypeVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details of @Model.Name</h1>
+
+<div>
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<br/>
+<div>
+    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index" class="btn btn-dark" >Back to List</a>
+</div>
