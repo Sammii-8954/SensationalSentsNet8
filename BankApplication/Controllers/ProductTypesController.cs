@@ -9,36 +9,36 @@ using BankApplication.Data;
 using SensationalScentsWeb.Data;
 using AutoMapper;
 using SensationalScentsWeb.Models;
+using SensationalScentsWeb.Contracts;
 
 namespace SensationalScentsWeb.Controllers
 {
     public class ProductTypesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        
+        private readonly IProductTypeRepository productTypeRepository;
         private readonly IMapper mapper;
 
-        public ProductTypesController(ApplicationDbContext context, IMapper mapper)
+        public ProductTypesController(IProductTypeRepository productTypeRepository, IMapper mapper)
         {
-            _context = context;
+            
+            this.productTypeRepository = productTypeRepository;
             this.mapper = mapper;
         }
 
         // GET: ProductTypes
         public async Task<IActionResult> Index()
         { 
-            var ProductTypes = mapper.Map<List<ProductTypeVM>> (await _context.ProductTypes.ToListAsync());
+            //var ProductTypes =  await productTypeRepository.GetAllAsync();
+            var ProductTypes = mapper.Map<List<ProductTypeVM>> (await productTypeRepository.GetAllAsync());
             return View(ProductTypes);
         }
 
         // GET: ProductTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var productType = await _context.ProductTypes.FindAsync(id);
+            var productType = await productTypeRepository.GetAsync(id);
             if (productType == null)
             {
                 return NotFound();
@@ -66,8 +66,7 @@ namespace SensationalScentsWeb.Controllers
             if (ModelState.IsValid)
             {
                 var productType = mapper.Map<ProductType>(productTypeVM);
-                _context.Add(productType);
-                await _context.SaveChangesAsync();
+                await productTypeRepository.AddAsync(productType);
                 return RedirectToAction(nameof(Index));
             }
             return View(productTypeVM);
@@ -76,12 +75,7 @@ namespace SensationalScentsWeb.Controllers
         // GET: ProductTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productType = await _context.ProductTypes.FindAsync(id);
+            var productType = await productTypeRepository.GetAsync(id);
             if (productType == null)
             {
                 return NotFound();
@@ -108,12 +102,11 @@ namespace SensationalScentsWeb.Controllers
                 try
                 {
                     var productType = mapper.Map<ProductType>(productTypeVM);
-                    _context.Update(productType);
-                    await _context.SaveChangesAsync();
+                    await productTypeRepository.UpdateAsync(productType);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductTypeExists(productTypeVM.Id))
+                    if (!await ProductTypeExistsAsync(productTypeVM.Id))
                     {
                         return NotFound();
                     }
@@ -127,39 +120,20 @@ namespace SensationalScentsWeb.Controllers
             return View(productTypeVM);
         }
 
-        // GET: ProductTypes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productType = await _context.ProductTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (productType == null)
-            {
-                return NotFound();
-            }
-
-            return View(productType);
-        }
+        
 
         // POST: ProductTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var productType = await _context.ProductTypes.FindAsync(id);
-          
-            _context.ProductTypes.Remove(productType);
-            await _context.SaveChangesAsync();
+            await productTypeRepository.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductTypeExists(int id)
+        private async Task<bool> ProductTypeExistsAsync(int id)
         {
-            return _context.ProductTypes.Any(e => e.Id == id);
+            return  await productTypeRepository.Exists(id);
         }
     }
 }

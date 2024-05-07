@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using SensationalScentsWeb.Data;
 using AutoMapper;
 using SensationalScentsWeb.Configuration;
+using SensationalScentsWeb.Contracts;
+using SensationalScentsWeb.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped <IProductTypeRepository, ProductTypeRepository>();
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 
 builder.Services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
