@@ -18,5 +18,15 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url('1ca497501d2ea627aefd9ba9a4f4aada.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
 }
+/*.full-background {
+    background-image: url('background image for asp.net app.jpg');
+    background-size: cover;
+    background-position: center;
+}*/

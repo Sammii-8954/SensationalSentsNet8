@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.bootstrap5.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.css" asp-append-version="true" />
+    @* <link rel="stylesheet" href="~/lib/background image for asp.net app.jpg" />  *@
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Sensational Scents.styles.css" asp-append-version="true" />
@@ -38,11 +39,11 @@
                                 Shop
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="ProductTypes" asp-action="Index">Candles</a></li>
-                                <li><a class="dropdown-item" href="#">Scented Candles</a></li>
+                                <li><a class="dropdown-item" asp-controller="ProductTypes" asp-action="Index">Product Listing</a></li>
+                               @*  <li><a class="dropdown-item" href="#">Scented Candles</a></li>
                                 <li><a class="dropdown-item" href="#">Bar Soaps</a></li>
                                 <li><a class="dropdown-item" href="#">Liquid Soaps</a></li>
-                                <li><a class="dropdown-item" href="#">Humidifiers</a></li>
+                                <li><a class="dropdown-item" href="#">Humidifiers</a></li> *@
                             </ul>
                         </li>
                     </ul>
@@ -57,6 +58,26 @@
         </main>
     </div>
 
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - Sensational Scents - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -68,6 +89,8 @@
     @* <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>*@
     <script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.6/js/dataTables.bootstrap5.js"></script>
+   @*  <img src="~/lib/background image for asp.net app.jpg" class="img-fluid" alt="..."> *@
+
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
