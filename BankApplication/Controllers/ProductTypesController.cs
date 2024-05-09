@@ -51,7 +51,7 @@ namespace SensationalScentsWeb.Controllers
 
             
         }
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         // GET: ProductTypes/Create
         public IActionResult Create()
         {
@@ -73,7 +73,7 @@ namespace SensationalScentsWeb.Controllers
             }
             return View(productTypeVM);
         }
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         // GET: ProductTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -86,7 +86,7 @@ namespace SensationalScentsWeb.Controllers
             var productTypeVM = mapper.Map<ProductTypeVM>(productType);
             return View(productTypeVM);
         }
-        [Authorize(Roles = "Administrator")]
+        [Authorize]
         // POST: ProductTypes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -123,7 +123,7 @@ namespace SensationalScentsWeb.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         // POST: ProductTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
